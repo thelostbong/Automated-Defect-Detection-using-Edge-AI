@@ -1,0 +1,4 @@
+train: C:\Users\Raghul\espdl_eval_final\merged_val\images
+val: C:\Users\Raghul\espdl_eval_final\merged_val\images
+nc: 2
+names: ['defect_colour', 'defect_missingpiece']
