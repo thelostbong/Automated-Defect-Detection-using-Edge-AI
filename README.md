@@ -937,7 +937,6 @@ Deggendorf Institute of Technology, Germany
 ---
 
 <p align="center">
-  <strong>Built with ❤️ by the DIT Quality Data Acquisition Team</strong><br>
   <em>Pushing the boundaries of embedded AI for manufacturing quality control</em>
 </p>
 
