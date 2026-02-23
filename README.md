@@ -98,14 +98,14 @@ This task separation solves the class imbalance problem and enables deployment o
          │   MODEL 1: Object Detection   │
          │   (Binary Shuttle Detection)  │
          │                               │
-         │  YOLOv11n (2.6M parameters)  │
-         │  Input: 512×512 RGB          │
+         │  YOLOv11n (2.6M parameters)   │
+         │  Input: 512×512 RGB           │
          │  Output: Shuttle Bounding Box │
          │                               │
          │  Performance:                 │
-         │  • mAP@0.5: 99.5%            │
-         │  • Recall: 100% ✅           │
-         │  • Precision: 99.1%          │
+         │  • mAP@0.5: 99.5%             │
+         │  • Recall: 100%               │
+         │  • Precision: 99.1%           │
          └──────────────┬────────────────┘
                         │
                         ▼
@@ -113,16 +113,16 @@ This task separation solves the class imbalance problem and enables deployment o
          │ MODEL 2: Defect Classification│
          │   (2-Class Defect Detection)  │
          │                               │
-         │  YOLOv11n (2.6M parameters)  │
-         │  Input: 512×512 RGB          │
+         │  YOLOv11n (2.6M parameters)   │
+         │  Input: 512×512 RGB           │
          │  Classes:                     │
-         │  • defect_colour             │
-         │  • defect_missingpiece       │
+         │  • defect_colour              │
+         │  • defect_missingpiece        │
          │                               │
          │  Performance:                 │
-         │  • mAP@0.5: 98.4%            │
-         │  • Recall: 91.7%             │
-         │  • Precision: 98.7%          │
+         │  • mAP@0.5: 98.4%             │
+         │  • Recall: 91.7%              │
+         │  • Precision: 98.7%           │
          └──────────────┬────────────────┘
                         │
                         ▼
@@ -440,14 +440,14 @@ calib_images/
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │  STEP 1: Camera Capture                                     │
-│  V4L2 DQBUF → 1920×1080 RGB565 @ 30 FPS                    │
+│  V4L2 DQBUF → 1920×1080 RGB565 @ 30 FPS                     │
 │  Memory: V4L2 memory-mapped buffers                         │
 └────────────────────┬────────────────────────────────────────┘
                      │
                      ▼
 ┌─────────────────────────────────────────────────────────────┐
-│  STEP 2: Preprocessing                                       │
-│  1920×1080 RGB565 → 512×512 RGB888 → INT8                  │
+│  STEP 2: Preprocessing                                      │
+│  1920×1080 RGB565 → 512×512 RGB888 → INT8                   │
 │  • Direct stretch (aspect ratio change)                     │
 │  • Normalization: [0,255] → [-128,127]                      │
 │  • Quantization: FP32 → INT8                                │
@@ -459,14 +459,14 @@ calib_images/
 │  STEP 3: NPU Inference                                      │
 │  Model: YOLOv11n INT8 (ESPDL format)                        │
 │  Hardware: ESP32-P4 NPU (400 MHz)                           │
-│  Outputs: 6 tensors (box0-2, score0-2)                     │
+│  Outputs: 6 tensors (box0-2, score0-2)                      │
 │  Time: ~4200ms                                              │
 └────────────────────┬────────────────────────────────────────┘
                      │
                      ▼
 ┌─────────────────────────────────────────────────────────────┐
 │  STEP 4: Postprocessing (DFL + NMS)                         │
-│  • DFL Decoding: 64 values → [x1,y1,x2,y2]                 │
+│  • DFL Decoding: 64 values → [x1,y1,x2,y2]                  │
 │  • Sigmoid activation on class scores                       │
 │  • NMS: IoU threshold 0.45                                  │
 │  • Confidence threshold: 0.10                               │
@@ -476,9 +476,9 @@ calib_images/
                      ▼
 ┌─────────────────────────────────────────────────────────────┐
 │  STEP 5: Coordinate Mapping                                 │
-│  512×512 space → 1920×1080 space                           │
-│  scale_x = 1920/512 = 3.75                                 │
-│  scale_y = 1080/512 = 2.109                                │
+│  512×512 space → 1920×1080 space                            │
+│  scale_x = 1920/512 = 3.75                                  │
+│  scale_y = 1080/512 = 2.109                                 │
 │  Time: ~1ms                                                 │
 └────────────────────┬────────────────────────────────────────┘
                      │
